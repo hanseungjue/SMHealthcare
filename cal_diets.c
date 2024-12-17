@@ -34,11 +34,15 @@ void loadDiets(const char* DIETFILEPATH) {
     }
 
      // ToCode: to read a list of the diets from the given file
-    while () {
+    while (fscanf(file, "%49s %d", diet_list[diet_list_size].food_name, &diet_list[diet_list_size].calories_intake) == 2) { 
+	//get file data to diet_list using fscanf.
+	//while loop condition: the information read by scanf is not equal to 2 = the end of file or reading fails
     	
-        if (diet_list_size >= MAX_DIETS){
+        if (diet_list_size >= MAX_DIETS){ //when get all data, close loop
         	break;
 		}
+		
+		diet_list_size++; //get information, make size getting bigger because of initializing size 0
     }
     fclose(file);
 }
@@ -57,16 +61,41 @@ void inputDiet(HealthData* health_data) {
     
     // ToCode: to provide the options for the diets to be selected
     printf("The list of diets:\n");
-    
+    for (i = 0; i < 6; i++) {
+        printf("%d. %s (%d kcal)\n", i + 1, diet_list[i].food_name, diet_list[i].calories_intake);
+    }
     
 	// ToCode: to enter the diet to be chosen with exit option
-    
+    printf("7. Exit\n");
 
     // ToCode: to enter the selected diet in the health data
-    
+    printf("Choose(1-7): ");
+    scanf("%d", &choice);
 
     // ToCode: to enter the total calories intake in the health data
+	while (choice != 7) { //Exit select -> while loop close, Go back to beginning
+        if (choice < 1 || choice > 7) { //when select wrong number
+            printf("ERROR! You select wrong number .\n");
+            printf("Choose(1-7): ");
+    		scanf("%d", &choice);
+        } else {
+            // one day three meal rules
+            if (health_data->diet_count >= 3) {
+                printf("You already eat three meals.\n");
+                break;
+            }
 
+            // food_name: diet_list -> health data copy
+            strcpy(health_data->diet[health_data->diet_count].food_name, diet_list[choice - 1].food_name);
+            // calories_intake: diet_list -> health data copy
+            health_data->diet[health_data->diet_count].calories_intake = diet_list[choice - 1].calories_intake;
+
+            // diet_count count
+            health_data->diet_count++;
+            // calculate and update total calories
+            health_data->total_calories_intake += diet_list[choice - 1].calories_intake;
+    	}
+	}
 
 }
 
