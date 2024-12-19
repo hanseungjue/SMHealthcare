@@ -36,6 +36,9 @@ int main() {
     	
 	   	if (remaining_calories == 0){
             printf("You have consumed all your calories for today! \n");
+			printf("System exiting...\n");           
+			saveData(HEALTHFILEPATH, &health_data); 
+            break;
 		} 
 		else{
 			printf("\n=======================================================================\n");
@@ -47,34 +50,35 @@ int main() {
         	printf("Select the desired number: ");
         	scanf("%d", &choice);
         	printf("=======================================================================\n");
-        }
         
-		// ToCode: to run the sysmtem based on the user's choice
-        switch (choice) {
-            case 1:
-            	inputExercise(&health_data);
-                break;
+        
+			// ToCode: to run the sysmtem based on the user's choice
+        	switch (choice) {
+            	case 1:
+            		inputExercise(&health_data);
+                	break;
                 
-            case 2:
-            	inputDiet(&health_data);
-                break;
-                
-            case 3:
-            	printHealthData(&health_data);
-                break;
-                
-            case 4:            	
-    			printf("Exit the system.\n");
-    			printf("=======================================================================\n");
-                break;
-                
-            default:
-                printf("[Error] Invalid option. \n");
-                printf("Please try again! \n");
-        }
-    } while (1);
-	
-	saveData(HEALTHFILEPATH, &health_data);
+            	case 2:
+            		inputDiet(&health_data);
+	                break;
+	                
+	            case 3:
+	            	printHealthData(&health_data);
+	                break;
+	                
+	            case 4:
+					printf("There is no file for health data.\n");            	
+	    			printf("Exit the system.\n");
+	    			printf("=======================================================================\n");
+	                break;
+	                
+	            default:
+	                printf("[Error] Invalid option. \n");
+	                printf("Please try again! \n");
+	        }
+    	}
+    } while (choice != 4);
+		
     return 0;
 }
 

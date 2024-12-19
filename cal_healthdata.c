@@ -13,7 +13,6 @@
 #include "cal_diets.h"
 #include "cal_healthdata.h"
 
-static int remaining_calories;
 /*
     description : enter the exercise and diet history in "health_data.txt" 
     input parameters : health_data - data object in which the selected exercise and diet is stored
@@ -26,6 +25,7 @@ static int remaining_calories;
 
 void saveData(const char* HEALTHFILEPATH, const HealthData* health_data) {
 	int i;
+	int remaining_calories = health_data->total_calories_intake - (1300 + health_data->total_calories_burned);
 	
     FILE* file = fopen(HEALTHFILEPATH, "w");
     if (file == NULL) {
@@ -56,10 +56,10 @@ void saveData(const char* HEALTHFILEPATH, const HealthData* health_data) {
     // ToCode: to save the total remaining calrories
     fprintf(file, "\n[Total] \n");
 	fprintf(file, "Basal metabolic rate - 1300kcal\n");
-    fprintf(file, "Remaining calories: %d\n", remaining_calories);
+    fprintf(file, "Remaining calories - %d\n", remaining_calories);
 
     fclose(file);
-    printf("Save completely");
+    printf("Save completely");  
 }
 
 /*
@@ -74,7 +74,7 @@ void saveData(const char* HEALTHFILEPATH, const HealthData* health_data) {
 
 void printHealthData(const HealthData* health_data) {
 	int i;
-	remaining_calories = health_data->total_calories_intake - (1300 + health_data->total_calories_burned);
+	int remaining_calories = health_data->total_calories_intake - (1300 + health_data->total_calories_burned);
 	
 	// ToCode: to print out the saved history of exercises
 	printf("=========================== History of Exercise =======================\n");
