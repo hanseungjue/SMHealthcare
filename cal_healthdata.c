@@ -55,7 +55,7 @@ void saveData(const char* HEALTHFILEPATH, const HealthData* health_data) {
 	printf("\n");
     // ToCode: to save the total remaining calrories
     fprintf(file, "\n[Total] \n");
-	printf("Basal metabolic rate - 1300kcal\n");
+	fprintf(file, "Basal metabolic rate - 1300kcal\n");
     fprintf(file, "Remaining calories: %d\n", remaining_calories);
 
     fclose(file);

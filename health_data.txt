@@ -1,0 +1,10 @@
+[Exercises] 
+walking - 4 kcal
+Total calories burned: 4
+
+[Diets] 
+Total calories intake: 0
+
+[Total] 
+Basal metabolic rate - 1300kcal
+Remaining calories: 0
