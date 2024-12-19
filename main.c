@@ -27,14 +27,14 @@ int main() {
     loadDiets(DIETFILEPATH);
 	loadExercises(EXERCISEFILEPATH);
 	
-	int remaining_calories = health_data->total_calories_intake - (1300 + health_data->total_calories_burned);
+//	int remaining_calories = health_data->total_calories_intake - (1300 + health_data->total_calories_burned);
 	
     // ToCode: to run the "Healthcare Management Systems" until all calories are used up or the user wants to exit the system
     do {
-	   	if (remaining_calories){
-            printf("You have consumed all your calories for today! \n");
-		} 
-		else{
+//	   	if (remaining_calories){
+//            printf("You have consumed all your calories for today! \n");
+//		} 
+//		else{
 			printf("\n=======================================================================\n");
         	printf("[Healthcare Management Systems] \n");
         	printf("1. Exercise \n");
@@ -44,7 +44,7 @@ int main() {
         	printf("Select the desired number: ");
         	scanf("%d", &choice);
         	printf("=======================================================================\n");
-        }
+//        }
         
 		// ToCode: to run the sysmtem based on the user's choice
         switch (choice) {
@@ -71,7 +71,7 @@ int main() {
         }
     } while (1);
 	
-	saveData(HEALTHFILEPATH, &health_data)
+	saveData(HEALTHFILEPATH, &health_data);
     return 0;
 }
 
