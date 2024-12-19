@@ -34,11 +34,15 @@ void loadExercises(const char* EXERCISEFILEPATH) {
     }
 
     // ToCode: to read a list of the exercises from the given file
-    while ( ) {
+    while (fscanf(file, "%49s %d", exercise_list[exercise_list_size].exercise_name, &exercise_list[exercise_list_size].calories_burned_per_minute) == 2) { 
+	//get file data to diet_list using fscanf.
+	//while loop condition: the information read by scanf is not equal to 2 = the end of file or reading fails
     	
-        if (exercise_list_size >= MAX_EXERCISES){
+        if (exercise_list_size >= MAX_EXERCISES){ //when get all data, close loop
         	break;
 		}
+		
+		exercise_list_size++; //get information, make size getting bigger because of initializing size 0
     }
 
     fclose(file);
@@ -63,7 +67,16 @@ void inputExercise(HealthData* health_data) {
 
 
     // ToCode: to enter the exercise to be chosen with exit option
+	for (i = 0; i < 6; i++) {
+        printf("%d. %s (%d kcal burned per min.)\n", i + 1, exercise_list[i].exercise_name, exercise_list[i].calories_burned_per_minute);
+    }
+    
+	// ToCode: to enter the diet to be chosen with exit option
+    printf("7. Exit\n");
 
+    // ToCode: to enter the selected diet in the health data
+    printf("Choose(1-7): ");
+    scanf("%d", &choice);
  
     
     // To enter the duration of the exercise
@@ -71,6 +84,17 @@ void inputExercise(HealthData* health_data) {
     scanf("%d", &duration);
 
     // ToCode: to enter the selected exercise and total calcories burned in the health data
-    
+    if (choice != 7) { //Exit select -> while loop close, Go back to beginning
+		// food_name: diet_list -> health data copy
+        strcpy(health_data->exercises[health_data->exercise_count].exercise_name, exercise_list[choice - 1].exercise_name);
+        // calories_intake: diet_list -> health data copy
+        health_data->exercises[health_data->exercise_count].calories_burned_per_minute = exercise_list[choice - 1].calories_burned_per_minute;
+			
+        // diet_count count
+        health_data->exercise_count++;
+        // calculate and update total calories
+        health_data->total_calories_burned += (exercise_list[choice - 1].calories_burned_per_minute * duration);
+	}
+
 
 }

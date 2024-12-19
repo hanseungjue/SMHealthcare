@@ -73,7 +73,7 @@ void inputDiet(HealthData* health_data) {
     scanf("%d", &choice);
 
     // ToCode: to enter the total calories intake in the health data
-	while (choice != 7) { //Exit select -> while loop close, Go back to beginning
+	if (choice != 7) { //Exit select -> while loop close, Go back to beginning
         if (choice < 1 || choice > 7) { //when select wrong number
             printf("ERROR! You select wrong number .\n");
             printf("Choose(1-7): ");
@@ -82,18 +82,19 @@ void inputDiet(HealthData* health_data) {
             // one day three meal rules
             if (health_data->diet_count >= 3) {
                 printf("You already eat three meals.\n");
-                break;
             }
-
-            // food_name: diet_list -> health data copy
-            strcpy(health_data->diet[health_data->diet_count].food_name, diet_list[choice - 1].food_name);
-            // calories_intake: diet_list -> health data copy
-            health_data->diet[health_data->diet_count].calories_intake = diet_list[choice - 1].calories_intake;
-
-            // diet_count count
-            health_data->diet_count++;
-            // calculate and update total calories
-            health_data->total_calories_intake += diet_list[choice - 1].calories_intake;
+			else{
+				// food_name: diet_list -> health data copy
+            	strcpy(health_data->diet[health_data->diet_count].food_name, diet_list[choice - 1].food_name);
+            	// calories_intake: diet_list -> health data copy
+            	health_data->diet[health_data->diet_count].calories_intake = diet_list[choice - 1].calories_intake;
+				
+            	// diet_count count
+            	health_data->diet_count++;
+            	// calculate and update total calories
+            	health_data->total_calories_intake += diet_list[choice - 1].calories_intake;
+			}
+            
     	}
 	}
 
