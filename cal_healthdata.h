@@ -42,7 +42,6 @@ Exercise exercises[MAX_EXERCISES];  // exercise history
 } HealthData;
 
 
-
 void saveData(const char* HEALTHFILEPATH,const HealthData* health_data);
 void printHealthData(const HealthData* health_data);
 

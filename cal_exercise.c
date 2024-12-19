@@ -88,7 +88,7 @@ void inputExercise(HealthData* health_data) {
 		// food_name: diet_list -> health data copy
         strcpy(health_data->exercises[health_data->exercise_count].exercise_name, exercise_list[choice - 1].exercise_name);
         // calories_intake: diet_list -> health data copy
-        health_data->exercises[health_data->exercise_count].calories_burned_per_minute = exercise_list[choice - 1].calories_burned_per_minute;
+        health_data->exercises[health_data->exercise_count].calories_burned_per_minute = exercise_list[choice - 1].calories_burned_per_minute * duration;
 			
         // diet_count count
         health_data->exercise_count++;
