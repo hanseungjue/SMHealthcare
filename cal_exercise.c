@@ -34,6 +34,7 @@ void loadExercises(const char* EXERCISEFILEPATH) {
     }
 
     // ToCode: to read a list of the exercises from the given file
+    
     while (fscanf(file, "%49s %d", exercise_list[exercise_list_size].exercise_name, &exercise_list[exercise_list_size].calories_burned_per_minute) == 2) { 
 	//get file data to diet_list using fscanf.
 	//while loop condition: the information read by scanf is not equal to 2 = the end of file or reading fails
@@ -84,13 +85,17 @@ void inputExercise(HealthData* health_data) {
     scanf("%d", &duration);
 
     // ToCode: to enter the selected exercise and total calcories burned in the health data
-    if (choice != 7) { //Exit select -> while loop close, Go back to beginning
+    if (choice != 7) { 
+	//Exit select -> while loop close, Go back to beginning
+	
 		// food_name: diet_list -> health data copy
+		//Since arrays start at 0, choice - 1 becomes the array index
         strcpy(health_data->exercises[health_data->exercise_count].exercise_name, exercise_list[choice - 1].exercise_name);
         // calories_intake: diet_list -> health data copy
+        //To use in the function within cal_healthdata.c, the calculated value with duration -> health_data
         health_data->exercises[health_data->exercise_count].calories_burned_per_minute = exercise_list[choice - 1].calories_burned_per_minute * duration;
 			
-        // diet_count count
+        // diet_count count(health_data order)
         health_data->exercise_count++;
         // calculate and update total calories
         health_data->total_calories_burned += (exercise_list[choice - 1].calories_burned_per_minute * duration);
